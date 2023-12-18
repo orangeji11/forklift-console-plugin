@@ -1,0 +1,15 @@
+export const DEFAULT_FIELDS_TO_COMPARE = [
+  'vmCount',
+  'networkCount',
+  'storageClassCount',
+  'regionCount',
+  'projectCount',
+  'imageCount',
+  'volumeCount',
+  'volumeTypeCount',
+  'datacenterCount',
+  'clusterCount',
+  'hostCount',
+  'storageDomainCount',
+  'datastoreCount',
+];

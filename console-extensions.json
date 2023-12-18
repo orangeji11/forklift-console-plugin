@@ -1,20 +1,349 @@
 [
   {
+    "type": "console.navigation/section",
+    "properties": {
+      "id": "migration",
+      "name": "%plugin__kubevirt-plugin~Migration%",
+      "insertAfter": ["virtualization", "workloads"],
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-sec-migration",
+        "data-testid": "migration-nav-item"
+      }
+    }
+  },
+  {
     "type": "console.page/route",
     "properties": {
-      "exact": true,
-      "path": "/example",
-      "component": { "$codeRef": "ExamplePage" }
+      "component": {
+        "$codeRef": "./modules/Overview/views/overview/OverviewPage"
+      },
+      "path": ["/mtv/settings/ns/:ns", "/mtv/settings/all-namespaces"],
+      "exact": false
+    },
+    "flags": {
+      "required": ["CAN_LIST_NS"]
     }
   },
   {
     "type": "console.navigation/href",
     "properties": {
-      "id": "example",
-      "name": "Plugin Example",
-      "href": "/example",
+      "id": "forkliftSettings",
+      "insertAfter": "importSeparator",
       "perspective": "admin",
-      "section": "home"
+      "section": "migration",
+      "href": "/mtv/settings",
+      "namespaced": true,
+      "name": "%plugin__forklift-console-plugin~Overview%"
+    },
+    "flags": {
+      "required": ["CAN_LIST_NS"]
+    }
+  },
+  {
+    "type": "console.navigation/resource-ns",
+    "properties": {
+      "id": "providers-ng",
+      "insertAfter": ["forkliftSettings", "importSeparator"],
+      "perspective": "admin",
+      "section": "migration",
+      "name": "%plugin__forklift-console-plugin~Providers for virtualization%",
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      },
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-providers",
+        "data-testid": "providers-nav-item"
+      }
+    }
+  },
+  {
+    "type": "console.page/resource/list",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Providers/views/list/ProvidersListPage"
+      },
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      }
+    }
+  },
+  {
+    "type": "console.page/resource/details",
+    "properties": {
+      "component": {
+        "$codeRef": "ProviderDetailsPage"
+      },
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      }
+    }
+  },
+  {
+    "type": "console.model-metadata",
+    "properties": {
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      },
+      "label": "Provider",
+      "labelPlural": "Providers",
+      "apiVersion": "v1beta1",
+      "apiGroup": "forklift.konveyor.io",
+      "kind": "Provider",
+      "plural": "providers",
+      "abbr": "PR",
+      "color": "#d5515e",
+      "id": "providers.forklift.konveyor.io",
+      "namespaced": true,
+      "crd": true
+    }
+  },
+
+  {
+    "type": "console.resource/create",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Providers/views/create/ProvidersCreatePage"
+      },
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      },
+      "label": "Provider",
+      "labelPlural": "Providers",
+      "apiVersion": "v1beta1",
+      "apiGroup": "forklift.konveyor.io",
+      "kind": "Provider",
+      "plural": "providers",
+      "abbr": "PR",
+      "color": "#d5515e",
+      "id": "providers.forklift.konveyor.io",
+      "namespaced": true,
+      "crd": true
+    }
+  },
+  {
+    "type": "console.navigation/resource-ns",
+    "properties": {
+      "id": "plans",
+      "insertAfter": "providers",
+      "perspective": "admin",
+      "section": "migration",
+      "name": "%plugin__forklift-console-plugin~Plans for virtualization%",
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      },
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-plans",
+        "data-testid": "plans-nav-item"
+      }
+    }
+  },
+  {
+    "type": "console.page/resource/list",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Plans/PlansWrapper"
+      },
+      "model": {  
+        "version": "v1beta1",
+        "kind": "Provider",
+        "group": "forklift.konveyor.io"
+      }
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Plans/PlanWizardWrapper"
+      },
+      "path": ["/mtv/plans/ns/:ns/create"],
+      "exact": false
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Plans/PlanWizardWrapper"
+      },
+      "path": ["/mtv/plans/ns/:ns/:planName/edit", "/mtv/plans/ns/:ns/:planName/duplicate"],
+      "exact": false
+    }
+  },
+  {
+    "type": "console.page/route",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/Plans/VMMigrationDetailsWrapper"
+      },
+      "path": ["/mtv/plans/ns/:ns/:planName"],
+      "exact": false
+    }
+  },
+  {
+    "type": "console.action/provider",
+    "properties": {
+      "contextId": "forklift-flat-plan",
+      "provider": {
+        "$codeRef": "./modules/Plans/UsePlanActions"
+      }
+    }
+  },
+  {
+    "type": "console.model-metadata",
+    "properties": {
+      "model": {
+        "version": "v1beta1",
+        "kind": "Plan",
+        "group": "forklift.konveyor.io"
+      },
+      "label": "Plan",
+      "labelPlural": "Plans",
+      "apiVersion": "v1beta1",
+      "apiGroup": "forklift.konveyor.io",
+      "kind": "Plan",
+      "plural": "plans",
+      "abbr": "PL",
+      "color": "#6f6d42",
+      "id": "plans.forklift.konveyor.io",
+      "namespaced": true,
+      "crd": true
+    }
+  },
+  {
+    "type": "console.navigation/resource-ns",
+    "properties": {
+      "id": "networkMappings",
+      "insertAfter": "plans",
+      "perspective": "admin",
+      "section": "migration",
+      "name": "%plugin__forklift-console-plugin~NetworkMaps for virtualization%",
+      "model": {
+        "version": "v1beta1",
+        "kind": "NetworkMap",
+        "group": "forklift.konveyor.io"
+      },
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-network-mappings",
+        "data-testid": "network-mappings-nav-item"
+      }
+    }
+  },
+  {
+    "type": "console.page/resource/list",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/NetworkMaps/NetworkMappingsWrapper"
+      },
+      "model": {
+        "version": "v1beta1",
+        "kind": "NetworkMap",
+        "group": "forklift.konveyor.io"
+      }
+    }
+  },
+  {
+    "type": "console.action/provider",
+    "properties": {
+      "contextId": "forklift-flat-network-mapping",
+      "provider": {
+        "$codeRef": "./modules/NetworkMaps/UseNetworkMappingActions"
+      }
+    }
+  },
+  {
+    "type": "console.model-metadata",
+    "properties": {
+      "model": {
+        "version": "v1beta1",
+        "kind": "NetworkMap",
+        "group": "forklift.konveyor.io"
+      },
+      "label": "NetworkMap",
+      "labelPlural": "NetworkMaps",
+      "apiVersion": "v1beta1",
+      "apiGroup": "forklift.konveyor.io",
+      "kind": "NetworkMap",
+      "plural": "networkmaps",
+      "abbr": "NM",
+      "color": "#e1b945",
+      "id": "networkmaps.forklift.konveyor.io",
+      "namespaced": true,
+      "crd": true
+    }
+  },
+  {
+    "type": "console.navigation/resource-ns",
+    "properties": {
+      "id": "storageMappings",
+      "insertAfter": "networkMappings",
+      "perspective": "admin",
+      "section": "migration",
+      "name": "%plugin__forklift-console-plugin~StorageMaps for virtualization%",
+      "model": {
+        "version": "v1beta1",
+        "kind": "StorageMap",
+        "group": "forklift.konveyor.io"
+      },
+      "dataAttributes": {
+        "data-quickstart-id": "qs-nav-storage-mappings",
+        "data-testid": "storage-mappings-nav-item"
+      }
+    }
+  },
+  {
+    "type": "console.page/resource/list",
+    "properties": {
+      "component": {
+        "$codeRef": "./modules/StorageMaps/StorageMappingsWrapper"
+      },
+      "model": {
+        "version": "v1beta1",
+        "kind": "StorageMap",
+        "group": "forklift.konveyor.io"
+      }
+    }
+  },
+  {
+    "type": "console.action/provider",
+    "properties": {
+      "contextId": "forklift-flat-storage-mapping",
+      "provider": {
+        "$codeRef": "./modules/StorageMaps/UseStorageMappingActions"
+      }
+    }
+  },
+  {
+    "type": "console.model-metadata",
+    "properties": {
+      "model": {
+        "version": "v1beta1",
+        "kind": "StorageMap",
+        "group": "forklift.konveyor.io"
+      },
+      "label": "StorageMap",
+      "labelPlural": "StorageMaps",
+      "apiVersion": "v1beta1",
+      "apiGroup": "forklift.konveyor.io",
+      "kind": "StorageMap",
+      "plural": "storagemaps",
+      "abbr": "SM",
+      "color": "#e1b945",
+      "id": "storagemaps.forklift.konveyor.io",
+      "namespaced": true,
+      "crd": true
     }
   }
 ]

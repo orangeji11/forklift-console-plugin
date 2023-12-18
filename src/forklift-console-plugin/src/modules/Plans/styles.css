@@ -1,0 +1,24 @@
+.forklift-table__status-cell-progress {
+  margin: calc(0px - var(--pf-global--spacer--form-element))
+    calc(0px - var(--pf-global--spacer--md));
+  width: 100%;
+  text-align: left;
+}
+
+.forklift-table__status-cell-progress div {
+  grid-gap: var(--pf-global--spacer--xs);
+}
+
+.forklift-table__flex-cell {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.forklift-table__flex-cell-label {
+  margin-left: var(--pf-global--spacer--sm);
+}
+
+.forklift-empty-state__icon {
+  max-width: 14rem;
+  max-height: 14rem;
+}

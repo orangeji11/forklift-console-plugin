@@ -1,0 +1,1 @@
+export { VMwareProviderHostsTable } from './VMwareProviderHostsTable';

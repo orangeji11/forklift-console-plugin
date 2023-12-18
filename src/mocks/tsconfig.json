@@ -1,0 +1,10 @@
+{
+  "extends": "../build/src/tsconfig.base.json",
+
+  "include": ["./src/**/*", "./src/**/*.json", "./src/**/*.har"],
+
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src"
+  }
+}

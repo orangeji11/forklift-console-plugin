@@ -1,0 +1,19 @@
+{
+  "extends": "../build/src/tsconfig.base.json",
+
+  "include": ["./src/**/*", "./plugin-metadata.ts", "./plugin-extensions.ts"],
+
+  "compilerOptions": {
+    "outDir": "./dist",
+
+    "paths": {
+      "src/*": ["./src/*"],
+      "common/src/*": ["../common/src/*"],
+      "legacy/src/*": ["../legacy/src/*"]
+    }
+  },
+
+  "references": [
+    { "path": "../legacy" }
+  ]
+}

@@ -1,0 +1,11 @@
+.mapping-view-box {
+  border: 1px solid #000000;
+}
+
+.mapping-view-arrow-cell {
+  padding-top: 12px;
+}
+
+.missing-item {
+  color: var(--pf-global--danger-color--100);
+}

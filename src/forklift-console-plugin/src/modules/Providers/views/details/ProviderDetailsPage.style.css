@@ -1,0 +1,16 @@
+.forklift-page-headings-alerts {
+    padding-left: 0;
+}
+
+.forklift-page-section {
+    border-top: 1px solid var(--pf-global--BorderColor--100);
+}
+
+.forklift-page-provider-networks-button {
+    padding-bottom: var(--pf-global--spacer--lg);
+}
+
+.forklift-page-provider-vm_concern-button {
+    padding: var(--pf-global--spacer--xs);
+}
+

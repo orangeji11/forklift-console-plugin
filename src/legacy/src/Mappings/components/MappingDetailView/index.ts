@@ -1,0 +1,1 @@
+export { MappingDetailView } from './MappingDetailView';
